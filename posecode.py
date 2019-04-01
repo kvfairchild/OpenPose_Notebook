@@ -57,7 +57,7 @@ def display_video(video):
 		vid = YouTubeVideo(YOUTUBE_ID)
 		display(vid)
 
-		download_youtube(YOUTUBE_ID)
+		youtube_download(YOUTUBE_ID)
 
 	else:
 
@@ -69,6 +69,13 @@ def display_video(video):
 		HTML(data='''<video alt="test" controls>
 		                <source src="data:video/mp4;base64,{0}" type="video/mp4" />
 		             </video>'''.format(encoded.decode('ascii')))
+
+
+def youtube_download(YOUTUBE_ID):
+
+	import os
+
+	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output "clip.%(ext)s" https://www.youtube.com/watch?v=$YOUTUBE_ID")
 
 
 
