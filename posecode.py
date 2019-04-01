@@ -45,6 +45,3 @@ def install_openpose():
 	  # build openpose
 	  os.system("!cd openpose && rm -rf build || true && mkdir build && cd build && cmake .. && make -j`nproc`")
 
-def test():
-
-	print "This is a test."
