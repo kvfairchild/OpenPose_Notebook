@@ -71,16 +71,11 @@ def display_video(video):
 		             </video>'''.format(encoded.decode('ascii')))
 
 
-def youtube_download(YOUTUBE_ID):
+def youtube_download(YOUTUBE_LINK):
 
 	import os
 
-	print("YES")
-
-	youtube_url = 'https://www.youtube.com/watch?v=' + YOUTUBE_ID
-	print(youtube_url)
-
-	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.%(ext)s' $youtube_url")
+	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.%(ext)s' $YOUTUBE_LINK")
 
 
 
