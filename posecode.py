@@ -52,11 +52,6 @@ def display_video(video):
 
 	if type(video) == str:
 
-		# download video
-		import os
-		os.system("!rm -rf clip.mp4")
-		youtube_download(video)
-
 		# display video
 		YOUTUBE_ID = get_id_from_link(video)
 
@@ -78,6 +73,8 @@ def display_video(video):
 def youtube_download(YOUTUBE_LINK):
 
 	import os
+
+	os.system("!rm -rf clip.mp4")
 
 	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK")
 
