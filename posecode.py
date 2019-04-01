@@ -13,7 +13,7 @@ def is_valid_youtube(YOUTUBE_LINK):
     if r.status_code == 200:
       return True
     else:
-      print("Please enter a valid YouTube URL.")
+      print("Please enter a valid YouTube URL or upload a video below.")
       return False
     
   except requests.ConnectionError:
@@ -75,7 +75,7 @@ def youtube_download(YOUTUBE_LINK):
 
 	import os
 
-	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.%(ext)s' ${YOUTUBE_LINK}")
+	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK")
 
 
 
