@@ -45,6 +45,29 @@ def install_openpose():
 	  # build openpose
 	  os.system("!cd openpose && rm -rf build || true && mkdir build && cd build && cmake .. && make -j`nproc`")
 
+
+def display_video(video, is_link):
+
+	from IPython.display import Video, YouTubeVideo
+
+	if is_link:
+
+		YOUTUBE_ID = get_id_from_link(video)
+		
+		YouTubeVideo(YOUTUBE_ID)
+
+	else:
+
+		Video(video)
+
+
+def get_id_from_link(YOUTUBE_LINK):
+
+	prefix, YOUTUBE_ID = YOUTUBE_LINK.split("=")
+
+	return YOUTUBE_ID
+
+
 def test():
 
 	print("This is a test.")
