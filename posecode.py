@@ -42,3 +42,7 @@ def install_openpose():
 	  !pip install -q youtube-dl
 	  # build openpose
 	  !cd openpose && rm -rf build || true && mkdir build && cd build && cmake .. && make -j`nproc`
+
+def test():
+
+	print "This is a test."
