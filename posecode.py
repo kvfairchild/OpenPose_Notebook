@@ -52,8 +52,9 @@ def display_video(video):
 
 	if type(video) == str:
 
+		print("HEY")
+
 		YOUTUBE_ID = get_id_from_link(video)
-		print(YOUTUBE_ID)
 		
 		YouTubeVideo(YOUTUBE_ID)
 
@@ -74,8 +75,3 @@ def get_id_from_link(YOUTUBE_LINK):
 	prefix, YOUTUBE_ID = YOUTUBE_LINK.split("=")
 
 	return YOUTUBE_ID
-
-
-def test():
-
-	print("This is a test.")
