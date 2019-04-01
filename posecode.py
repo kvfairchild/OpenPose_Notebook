@@ -53,6 +53,7 @@ def display_video(video):
 	if type(video) == str:
 
 		YOUTUBE_ID = get_id_from_link(video)
+		print(YOUTUBE_ID)
 		
 		YouTubeVideo(YOUTUBE_ID)
 
