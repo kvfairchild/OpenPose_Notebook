@@ -52,12 +52,16 @@ def display_video(video):
 
 	if type(video) == str:
 
+		# download video
+		import os
+		os.system("!rm -rf clip.mp4")
+		youtube_download(video)
+
+		# display video
 		YOUTUBE_ID = get_id_from_link(video)
 
 		vid = YouTubeVideo(YOUTUBE_ID)
 		display(vid)
-
-		youtube_download(YOUTUBE_ID)
 
 	else:
 
@@ -79,7 +83,7 @@ def youtube_download(YOUTUBE_LINK):
 
 
 
-def get_id_from_link(YOUTUBE_LINK):
+def _get_id_from_link(YOUTUBE_LINK):
 
 	prefix, YOUTUBE_ID = YOUTUBE_LINK.split("=")
 
