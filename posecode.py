@@ -23,9 +23,6 @@ def is_valid_youtube(YOUTUBE_LINK):
 
 def install_openpose():
 
-	import os
-	from os.path import exists, join, basename, splitext
-
 	git_repo_url = 'https://github.com/CMU-Perceptual-Computing-Lab/openpose.git'
 	project_name = splitext(basename(git_repo_url))[0]
 
