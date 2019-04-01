@@ -75,6 +75,8 @@ def youtube_download(YOUTUBE_ID):
 
 	import os
 
+	print("YES")
+
 	youtube_url = 'https://www.youtube.com/watch?v=' + YOUTUBE_ID
 	print(youtube_url)
 
