@@ -74,7 +74,7 @@ def clip_video(video):
 
 	import os
 	import subprocess
-	subprocess.check_call(["ls", "-l"])
+	subprocess.run(["ls", "-l"])
 
 	os.system("!rm -rf clip.mp4")
 	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK")
