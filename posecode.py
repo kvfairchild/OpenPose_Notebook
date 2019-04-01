@@ -52,11 +52,10 @@ def display_video(video):
 
 	if type(video) == str:
 
-		print("HEY")
-
 		YOUTUBE_ID = get_id_from_link(video)
-		
-		YouTubeVideo(YOUTUBE_ID)
+
+		vid = YouTubeVideo(YOUTUBE_ID)
+		display(vid)
 
 	else:
 
