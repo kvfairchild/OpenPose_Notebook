@@ -72,6 +72,7 @@ def display_video(video):
 
 def clip_video(video):
 
+	import os
 	import subprocess
 	subprocess.check_call(["ls", "-l"], shell=True)
 
