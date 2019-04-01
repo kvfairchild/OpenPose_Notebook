@@ -1,4 +1,4 @@
-/* Functions to abstract OpenPose.ipynb logic */
+# Functions to abstract OpenPose.ipynb logic
 
 
 def is_valid_youtube(YOUTUBE_LINK):
