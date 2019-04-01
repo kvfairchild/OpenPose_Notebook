@@ -31,6 +31,8 @@ def install_openpose():
 
 	if not exists(project_name):
 
+		print("does not exist")
+
 	  # see: https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/949
 	  # install new CMake becaue of CUDA10
 	  os.system("!wget -q https://cmake.org/files/v3.13/cmake-3.13.0-Linux-x86_64.tar.gz")
