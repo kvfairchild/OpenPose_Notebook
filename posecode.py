@@ -47,6 +47,10 @@ def install_openpose():
 	  # build openpose
 	  os.system("!cd openpose && rm -rf build || true && mkdir build && cd build && cmake .. && make -j`nproc`")
 
+	else:
+
+		print("does exist")
+
 
 def display_video(video):
 
