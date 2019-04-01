@@ -31,9 +31,6 @@ def install_openpose():
 
 	if not exists(project_name):
 
-	  import subprocess
-	  subprocess.run(["ls", "-l"])
-
 	  # see: https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/949
 	  # install new CMake becaue of CUDA10
 	  os.system(["!wget -q https://cmake.org/files/v3.13/cmake-3.13.0-Linux-x86_64.tar.gz"])
@@ -75,7 +72,8 @@ def display_video(video):
 
 def clip_video(video):
 
-	import os
+	import subprocess
+	subprocess.run(["ls", "-l"])
 
 	os.system("!rm -rf clip.mp4")
 	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK")
