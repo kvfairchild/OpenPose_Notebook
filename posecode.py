@@ -75,7 +75,7 @@ def youtube_download(YOUTUBE_ID):
 
 	import os
 
-	youtube_url = 'https://www.youtube.com/watch?v=' + $YOUTUBE_ID
+	youtube_url = 'https://www.youtube.com/watch?v=' + YOUTUBE_ID
 	print(youtube_url)
 
 	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.%(ext)s' $youtube_url")
