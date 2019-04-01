@@ -48,7 +48,7 @@ def install_openpose():
 
 def display_video(video, is_link):
 
-	from IPython.display import Video, YouTubeVideo
+	from IPython.display import YouTubeVideo, HTML
 
 	if is_link:
 
@@ -58,7 +58,14 @@ def display_video(video, is_link):
 
 	else:
 
-		Video(video)
+		import io
+		import base64
+
+		video = io.open(video, 'r+b').read()
+		encoded = base64.b64encode(video)
+		HTML(data='''<video alt="test" controls>
+		                <source src="data:video/mp4;base64,{0}" type="video/mp4" />
+		             </video>'''.format(encoded.decode('ascii')))
 
 
 def get_id_from_link(YOUTUBE_LINK):
