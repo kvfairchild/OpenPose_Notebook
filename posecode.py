@@ -57,6 +57,8 @@ def display_video(video):
 		vid = YouTubeVideo(YOUTUBE_ID)
 		display(vid)
 
+		download_youtube(YOUTUBE_ID)
+
 	else:
 
 		import io
@@ -68,14 +70,6 @@ def display_video(video):
 		                <source src="data:video/mp4;base64,{0}" type="video/mp4" />
 		             </video>'''.format(encoded.decode('ascii')))
 
-
-def download_youtube(YOUTUBE_ID):
-
-	import os
-
-	os.system("!rm -rf youtube.mp4")
-	# download the youtube with the given ID
-	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.%(ext)s' https://www.youtube.com/watch?v=$YOUTUBE_ID")
 
 
 def get_id_from_link(YOUTUBE_LINK):
