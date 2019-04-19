@@ -30,9 +30,11 @@ def install_openpose():
 	git_repo_url = 'https://github.com/CMU-Perceptual-Computing-Lab/openpose.git'
 	project_name = splitext(basename(git_repo_url))[0]
 
-	print("installing openpose...")
-	subprocess.call(['./install_openpose.sh'])
-	print("install complete!")
+	if not exists(project_name):
+
+		print("installing openpose...")
+		subprocess.call(['./install_openpose.sh'])
+		print("install complete!")
 
 
 def display_video(video, youtube):
