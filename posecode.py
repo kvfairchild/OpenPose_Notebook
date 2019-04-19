@@ -32,7 +32,9 @@ def install_openpose():
 
 	if not exists(project_name):
 
+		print("installing openpose...")
 		subprocess.call(['./install_openpose.sh'])
+		print("install complete!")
 
 
 def display_video(video, youtube):
