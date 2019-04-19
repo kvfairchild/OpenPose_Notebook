@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # see: https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/949
-# install new CMake becaue of CUDA10
+# install new CMake because of CUDA10
 wget -q https://cmake.org/files/v3.13/cmake-3.13.0-Linux-x86_64.tar.gz
 tar xfz cmake-3.13.0-Linux-x86_64.tar.gz --strip-components=1 -C /usr/local
 # clone openpose

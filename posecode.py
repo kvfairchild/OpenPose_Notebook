@@ -32,7 +32,7 @@ def openpose_installed():
 
 	if exists(project_name):
 		return True
-	else
+	else:
 		return False
 
 
