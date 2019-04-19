@@ -32,7 +32,7 @@ def install_openpose():
 
 	if not exists(project_name):
 
-		from subprocess import call
+		from subprocess import run
 
 		print("installing openpose...")
 		run('chmod u+x OpenPose-Notebook/install_openpose.sh')
