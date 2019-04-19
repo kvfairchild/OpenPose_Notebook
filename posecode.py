@@ -32,10 +32,10 @@ def install_openpose():
 
 	if not exists(project_name):
 
-		import subprocess
+		from subprocess import call
 
 		print("installing openpose...")
-		subprocess.call(['./install_openpose.sh'])
+		call(['./install_openpose.sh'])
 		print("install complete!")
 
 
