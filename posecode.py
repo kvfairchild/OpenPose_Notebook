@@ -50,7 +50,7 @@ def display_video(video):
 
 	from IPython.display import YouTubeVideo, HTML
 
-	if type(video) == str:
+	if type(video) == dict:
 
 		# display video
 		YOUTUBE_ID = get_id_from_link(video)
@@ -70,11 +70,9 @@ def display_video(video):
 		             </video>'''.format(encoded.decode('ascii')))
 
 
-def clip_video(video):
+def run_openpose(video):
 
 	import os
-	import subprocess
-	subprocess.run(["ls", "-l"])
 
 	os.system("!rm -rf clip.mp4")
 	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK")
@@ -86,6 +84,16 @@ def clip_video(video):
 	os.system("!cd openpose && ./build/examples/openpose/openpose.bin --video ../video.mp4 --write_json ./output/ --display 0  --write_video ../openpose.avi")
 	# convert the result into MP4
 	os.system("!ffmpeg -y -loglevel info -i openpose.avi output.mp4")
+
+
+def display_results(file_name, width=640, height=480):
+  import io
+  import base64
+  from IPython.display import HTML
+  video_encoded = base64.b64encode(io.open(file_name, 'rb').read())
+  return HTML(data='''<video width="{0}" height="{1}" alt="test" controls>
+                        <source src="data:video/mp4;base64,{2}" type="video/mp4" />
+                      </video>'''.format(width, height, video_encoded.decode('ascii')))
 
 
 
