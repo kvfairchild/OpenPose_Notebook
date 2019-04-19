@@ -36,7 +36,7 @@ def install_openpose():
 
 		print("installing openpose...")
 		run('chmod u+x OpenPose-Notebook/install_openpose.sh', shell=True)
-		run('./OpenPose-Notebook/install_openpose.sh ' + git_repo_url, capture_output=True)
+		run('./OpenPose-Notebook/install_openpose.sh', shell=True)
 		print("install complete!")
 
 	else:
