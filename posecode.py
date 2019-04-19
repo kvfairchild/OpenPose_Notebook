@@ -22,6 +22,21 @@ def is_valid_youtube(YOUTUBE_LINK):
     return False
 
 
+def install_openpose():
+
+	if not openpose_installed:
+
+		from subprocess import call
+
+		print("installing openpose...")
+		call('./OpenPose-Notebook/install_openpose.sh', shell=True)
+		print("install complete!")
+
+	else:
+
+		print("existing openpose installation detected, moving on.")
+
+
 def openpose_installed():
 
 	import os
@@ -34,23 +49,6 @@ def openpose_installed():
 		return True
 	else:
 		return False
-
-
-def install_openpose():
-
-	import os
-	from os.path import splitext, basename, exists
-
-	git_repo_url = 'https://github.com/CMU-Perceptual-Computing-Lab/openpose.git'
-	project_name = splitext(basename(git_repo_url))[0]
-
-	if not exists(project_name):
-
-		from subprocess import call
-
-		print("installing openpose...")
-		call('./install_openpose.sh', shell=True)
-		print("install complete!")
 
 
 def display_video(video, youtube):
