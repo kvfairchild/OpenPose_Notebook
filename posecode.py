@@ -46,11 +46,11 @@ def install_openpose():
 	  os.system("!cd openpose && rm -rf build || true && mkdir build && cd build && cmake .. && make -j`nproc`")
 
 
-def display_video(video):
+def display_video(video, youtube):
 
 	from IPython.display import YouTubeVideo, HTML
 
-	if type(video) == dict:
+	if youtube:
 
 		# display video
 		YOUTUBE_ID = get_id_from_link(video)
