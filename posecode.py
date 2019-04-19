@@ -13,6 +13,7 @@ def is_valid_youtube(YOUTUBE_LINK):
     if r.status_code == 200:
       return True
     else:
+      print("Code: " + r.status_code + "\n")
       print("Please enter a valid YouTube URL or upload a video below.")
       return False
     
@@ -53,7 +54,7 @@ def display_video(video, youtube):
 	if youtube:
 
 		# display video
-		YOUTUBE_ID = get_id_from_link(video)
+		YOUTUBE_ID = _get_id_from_link(video)
 
 		vid = YouTubeVideo(YOUTUBE_ID)
 		display(vid)
