@@ -35,8 +35,8 @@ def install_openpose():
 		from subprocess import run
 
 		print("installing openpose...")
-		run('chmod u+x OpenPose-Notebook/install_openpose.sh', shell=True, check=True)
-		run('./OpenPose-Notebook/install_openpose.sh ' + git_repo_url, shell=True, check=True)
+		run('chmod u+x OpenPose-Notebook/install_openpose.sh', shell=True)
+		run('./OpenPose-Notebook/install_openpose.sh ' + git_repo_url, shell=True, capture_output=True)
 		print("install complete!")
 
 	else:
