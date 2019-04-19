@@ -35,7 +35,7 @@ def install_openpose():
 		from subprocess import call
 
 		print("installing openpose...")
-		call(['install_openpose.sh'])
+		call('./install_openpose.sh', shell=True)
 		print("install complete!")
 
 
