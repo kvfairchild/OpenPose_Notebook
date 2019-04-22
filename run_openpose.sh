@@ -1,3 +1,5 @@
+#!/bin/sh
+
 rm -rf clip.mp4
 youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK
 
