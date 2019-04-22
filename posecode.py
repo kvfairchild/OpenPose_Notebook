@@ -51,14 +51,11 @@ def display_video(video, youtube):
 
 	else:
 
-		import io
-		import base64
-
-		video = io.open(video, 'r+b').read()
-		encoded = base64.b64encode(video)
-		HTML(data='''<video alt="test" controls>
-		                <source src="data:video/mp4;base64,{0}" type="video/mp4" />
-		             </video>'''.format(encoded.decode('ascii')))
+	HTML("""
+	<video width="320" height="240" controls>
+	  <source src="path/to/your.mp4" type="video/mp4">
+	</video>
+	""")
 
 
 def run_openpose(video):
