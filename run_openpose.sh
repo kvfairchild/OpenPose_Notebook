@@ -5,13 +5,15 @@ CLIP_END=$3
 
 rm -rf clip.mp4
 
-if [-f $VIDEO_PATH]
+if [ -f $VIDEO_PATH ]
 then
 	echo $VIDEO_PATH ' is a file'
 	mv $VIDEO_PATH 'clip.mp4'
+	.
 else
 	echo $VIDEO_PATH 'is not a file'
 	youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $VIDEO_PATH
+	.
 fi
 
 # cut the first n seconds
