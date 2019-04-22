@@ -10,10 +10,10 @@ def is_valid_youtube(YOUTUBE_LINK):
 
 	try:
 		r = requests.head(youtube_url)
-	if r.status_code == 200:
-		return True
-	else:
-		return False
+		if r.status_code == 200:
+			return True
+		else:
+			return False
 
 	except requests.ConnectionError:
 		print("Failed to connect to YouTube.")
