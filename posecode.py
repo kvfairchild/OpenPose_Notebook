@@ -51,6 +51,9 @@ def display_video(video_path, youtube):
 
 	else:
 
+		import io
+		import base64
+
 		video = io.open(video_path, 'r+b').read()
 		encoded = base64.b64encode(video)
 		HTML(data='''<video alt="test" controls>
