@@ -51,11 +51,11 @@ def display_video(video, youtube):
 
 	else:
 
-	HTML("""
-	<video width="320" height="240" controls>
-	  <source src="path/to/your.mp4" type="video/mp4">
-	</video>
-	""")
+		HTML("""
+		<video width="320" height="240" controls>
+		  <source src="path/to/your.mp4" type="video/mp4">
+		</video>
+		""")
 
 
 def run_openpose(video):
