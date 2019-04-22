@@ -2,6 +2,9 @@
 YOUTUBE_LINK=$1
 CLIP_LEN_S=$2
 
+echo $YOUTUBE_LINK
+echo $CLIP_LEN_S
+
 rm -rf clip.mp4
 youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK
 
