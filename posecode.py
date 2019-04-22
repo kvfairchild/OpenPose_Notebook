@@ -22,19 +22,19 @@ def is_valid_youtube(YOUTUBE_LINK):
 
 def display_video(video_path, youtube):
 
-	if youtube:
+if youtube:
 
-		from IPython.display import YouTubeVideo, HTML
+	from IPython.display import YouTubeVideo, HTML
 
-		# display video
-		YOUTUBE_ID = _get_id_from_link(video_path)
+	# display video
+	YOUTUBE_ID = _get_id_from_link(video_path)
 
-		video = YouTubeVideo(YOUTUBE_ID)
-		display(video)
+	video = YouTubeVideo(YOUTUBE_ID)
+	display(video)
 
-	else:
+else:
 
-		return display_local(video_path)
+	return display_local(video_path)
 
 
 def display_local(video_path, width=640, height=480):
@@ -50,21 +50,19 @@ def display_local(video_path, width=640, height=480):
                       </video>'''.format(width, height, video_encoded.decode('ascii')))
 
 
-def run_openpose(video):
+def openpose_installed():
 
 	import os
+	from os.path import splitext, basename, exists
 
-	os.system("!rm -rf clip.mp4")
-	os.system("!youtube-dl -f 'bestvideo[ext=mp4]' --output 'clip.mp4' $YOUTUBE_LINK")
+	git_repo_url = 'https://github.com/CMU-Perceptual-Computing-Lab/openpose.git'
+	project_name = splitext(basename(git_repo_url))[0]
 
-	# cut the first 5 seconds
-	os.system("!ffmpeg -y -loglevel info -i clip.mp4 -t $CLIP_LEN_S video.mp4")
-	# detect poses on the these 5 seconds
-	os.system("!rm openpose.avi")
-	os.system("!cd openpose && ./build/examples/openpose/openpose.bin --video ../video.mp4 --write_json ./output/ --display 0  --write_video ../openpose.avi")
-	# convert the result into MP4
-	os.system("!ffmpeg -y -loglevel info -i openpose.avi output.mp4")
-
+	if exists(project_name):
+		print("Existing OpenPose installation detected, moving on.")
+		return True
+	else:
+		return False
 
 
 def _get_id_from_link(YOUTUBE_LINK):
