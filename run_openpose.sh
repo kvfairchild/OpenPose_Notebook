@@ -11,4 +11,4 @@ ffmpeg -y -loglevel info -i clip.mp4 -t $CLIP_LEN_S video.mp4
 rm openpose.avi
 cd openpose && ./build/examples/openpose/openpose.bin --video ../video.mp4 --write_json ./output/ --display 0  --write_video ../openpose.avi
 # convert the result into MP4
-ffmpeg -y -loglevel info -i ../openpose.avi output.mp4
+ffmpeg -y -loglevel info -i ../openpose.avi openpose/output.mp4
