@@ -51,14 +51,7 @@ def display_video(video_path, youtube):
 
 	else:
 
-		from io import open
-		import base64
-
-		video = open(video_path, 'r+b').read()
-		encoded = base64.b64encode(video)
-		HTML(data='''<video alt="test" controls>
-			<source src="data:video/mp4;base64,{0}" type="video/mp4" />
-            </video>'''.format(encoded.decode('ascii')))
+		display_local(video_path)
 
 
 def run_openpose(video):
@@ -77,7 +70,7 @@ def run_openpose(video):
 	os.system("!ffmpeg -y -loglevel info -i openpose.avi output.mp4")
 
 
-def display_results(file_name, width=640, height=480):
+def display_local(file_name, width=640, height=480):
   import io
   import base64
   from IPython.display import HTML
