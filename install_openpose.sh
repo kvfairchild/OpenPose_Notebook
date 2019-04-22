@@ -15,3 +15,5 @@ apt-get -qq install -y libatlas-base-dev libprotobuf-dev libleveldb-dev libsnapp
 pip install -q youtube-dl
 # build openpose
 cd openpose && rm -rf build || true && mkdir build && cd build && cmake .. && make -j`nproc`
+
+echo "OpenPose install complete."

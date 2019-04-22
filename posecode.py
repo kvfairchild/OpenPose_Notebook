@@ -31,7 +31,7 @@ def openpose_installed():
 	project_name = splitext(basename(git_repo_url))[0]
 
 	if exists(project_name):
-		print("existing openpose installation detected, moving on.")
+		print("Existing OpenPose installation detected, moving on.")
 		return True
 	else:
 		return False
