@@ -51,7 +51,7 @@ def display_video(video_path, youtube):
 
 	else:
 
-		display_local(video_path)
+		return display_local(video_path)
 
 
 def run_openpose(video):
