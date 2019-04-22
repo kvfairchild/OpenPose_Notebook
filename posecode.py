@@ -34,7 +34,7 @@ def display_video(video_path, youtube):
 
 	else:
 
-		display_local(video_path)
+		return display_local(video_path)
 
 
 def display_local(video_path, width=640, height=480):
