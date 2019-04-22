@@ -9,15 +9,15 @@ def is_valid_youtube(YOUTUBE_LINK):
 	youtube_url = "https://www.youtube.com/oembed?format=json&url=" + YOUTUBE_LINK
 
 	try:
-	r = requests.head(youtube_url)
+		r = requests.head(youtube_url)
 	if r.status_code == 200:
-	  return True
+		return True
 	else:
-	  return False
+		return False
 
 	except requests.ConnectionError:
-	print("Failed to connect to YouTube.")
-	return False
+		print("Failed to connect to YouTube.")
+		return False
 
 
 def display_video(video_path, youtube):
