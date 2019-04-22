@@ -1,12 +1,12 @@
 # Functions to abstract OpenPose.ipynb logic
 
 
-def is_valid_youtube(YOUTUBE_LINK):
+def is_valid_youtube(video_path):
   
 	import json
 	import requests
 
-	youtube_url = "https://www.youtube.com/oembed?format=json&url=" + YOUTUBE_LINK
+	youtube_url = "https://www.youtube.com/oembed?format=json&url=" + video_path
 
 	try:
 		r = requests.head(youtube_url)
