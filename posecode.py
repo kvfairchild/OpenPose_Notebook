@@ -37,25 +37,25 @@ def openpose_installed():
 		return False
 
 
-def display_video(video, youtube):
+def display_video(video_path, youtube):
 
 	from IPython.display import YouTubeVideo, HTML
 
 	if youtube:
 
 		# display video
-		YOUTUBE_ID = _get_id_from_link(video)
+		YOUTUBE_ID = _get_id_from_link(video_path)
 
-		vid = YouTubeVideo(YOUTUBE_ID)
-		display(vid)
+		video = YouTubeVideo(YOUTUBE_ID)
+		display(video)
 
 	else:
 
-		HTML("""
-		<video width="320" height="240" controls>
-		  <source src="path/to/your.mp4" type="video/mp4">
-		</video>
-		""")
+		video = io.open(video_path, 'r+b').read()
+		encoded = base64.b64encode(video)
+		HTML(data='''<video alt="test" controls>
+			<source src="data:video/mp4;base64,{0}" type="video/mp4" />
+            </video>'''.format(encoded.decode('ascii')))
 
 
 def run_openpose(video):
