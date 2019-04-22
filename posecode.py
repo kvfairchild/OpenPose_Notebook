@@ -51,10 +51,10 @@ def display_video(video_path, youtube):
 
 	else:
 
-		import io
+		from io import open
 		import base64
 
-		video = io.open(video_path, 'r+b').read()
+		video = open(video_path, 'r+b').read()
 		encoded = base64.b64encode(video)
 		HTML(data='''<video alt="test" controls>
 			<source src="data:video/mp4;base64,{0}" type="video/mp4" />
