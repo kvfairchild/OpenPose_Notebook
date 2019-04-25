@@ -13,11 +13,11 @@ def is_valid_youtube(video_path):
 		if r.status_code == 200:
 			return True
 		else:
-            # if not a YT video, is it a valid file path?
-            try:
-                open(video_path, 'r')
-            except FileNotFoundError:
-                print("Please enter either a valid file path or YouTube video link.")
+			# if not a YT video, is it a valid file path?
+			try:
+				open(video_path, 'r')
+			except FileNotFoundError:
+				print("Please enter either a valid file path or YouTube video link.")
 			return False
 
 	except requests.ConnectionError:
@@ -51,8 +51,8 @@ def display_local(video_path, width=640, height=480):
 	video_encoded = base64.b64encode(io.open(video_path, 'rb').read())
 
 	return HTML(data='''<video width="{0}" height="{1}" alt="test" controls>
-	                <source src="data:video/mp4;base64,{2}" type="video/mp4" />
-	              </video>'''.format(width, height, video_encoded.decode('ascii')))
+					<source src="data:video/mp4;base64,{2}" type="video/mp4" />
+				  </video>'''.format(width, height, video_encoded.decode('ascii')))
 
 
 def openpose_installed():
