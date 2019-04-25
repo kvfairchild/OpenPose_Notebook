@@ -13,6 +13,11 @@ def is_valid_youtube(video_path):
 		if r.status_code == 200:
 			return True
 		else:
+            # if not a YT video, is it a valid file path?
+            try:
+                open(video_path, 'r')
+            except FileNotFoundError:
+                print("Please enter either a valid file path or YouTube video link.")
 			return False
 
 	except requests.ConnectionError:
@@ -70,3 +75,4 @@ def _get_id_from_link(YOUTUBE_LINK):
 	prefix, YOUTUBE_ID = YOUTUBE_LINK.split("=")
 
 	return YOUTUBE_ID
+
