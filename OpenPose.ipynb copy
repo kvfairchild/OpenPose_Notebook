@@ -1,0 +1,352 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "X38L6tanrnrB"
+   },
+   "source": [
+    "# Pose Detection with OpenPose\n",
+    "\n",
+    "This notebook uses the open source project [CMU-Perceptual-Computing-Lab/openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose.git) to perform multi-person pose estimation on a given video."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 359
+    },
+    "colab_type": "code",
+    "id": "Nd0FzyFBRlyN",
+    "outputId": "6f49d0de-ad0a-47ec-976a-0b9e01f9af8d"
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<img src=\"https://github.com/CMU-Perceptual-Computing-Lab/openpose/raw/master/doc/media/dance_foot.gif\">"
+      ],
+      "text/plain": [
+       "<IPython.core.display.HTML object>"
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# display OpenPose demo gif\n",
+    "from IPython.display import HTML\n",
+    "HTML('<img src=\"https://github.com/CMU-Perceptual-Computing-Lab/openpose/raw/master/doc/media/dance_foot.gif\">')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "CFsCoiuTcQ-F"
+   },
+   "source": [
+    "## Notebook setup\n",
+    "\n",
+    "We're first going to load a file of functions from Github. \n",
+    "\n",
+    "(This keeps the notebook clean and simple by abstracting out some of the helper code.)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 136
+    },
+    "colab_type": "code",
+    "id": "4pEUFOAVV-PD",
+    "outputId": "b93b33b9-eb9d-4a8f-fae0-279716dc1b65"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Cloning into 'OpenPose_Notebook'...\n",
+      "remote: Enumerating objects: 172, done.\u001b[K\n",
+      "remote: Counting objects: 100% (172/172), done.\u001b[K\n",
+      "remote: Compressing objects: 100% (125/125), done.\u001b[K\n",
+      "remote: Total 332 (delta 94), reused 125 (delta 47), pack-reused 160\u001b[K\n",
+      "Receiving objects: 100% (332/332), 37.32 KiB | 0 bytes/s, done.\n",
+      "Resolving deltas: 100% (149/149), done.\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "from os.path import basename, splitext\n",
+    "\n",
+    "git_repo_url = 'https://github.com/kvgallagher/OpenPose_Notebook.git'\n",
+    "code_location = '/home/jupyter/' + splitext(basename(git_repo_url))[0]\n",
+    "\n",
+    "# if directory exists, delete before cloning\n",
+    "!rm -rf $code_location\n",
+    "!git clone $git_repo_url\n",
+    "\n",
+    "import sys\n",
+    "sys.path.append(code_location)\n",
+    "\n",
+    "from OpenPose_Notebook import posecode\n",
+    "from posecode import *\n",
+    "\n",
+    "# force directory reload to ensure up to date\n",
+    "from importlib import reload\n",
+    "posecode = reload(posecode)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "Cejc1zaCcyyR"
+   },
+   "source": [
+    "## Select your video file\n",
+    "\n",
+    "You can choose to either enter a link to a YouTube video or upload your own. \n",
+    "\n",
+    "**VIDEO_PATH**: Can be *either* a complete link to a public YouTube video (e.g. 'https://www.youtube.com/watch?v=dQw4w9WgXcQ') *or* a path to a local video.\n",
+    "\n",
+    "**CLIP_START** / ** CLIP_END**: The start and end times of the video to provide to OpenPose. These should be in *hour*:*minute*:*second* format."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {
+    "colab": {},
+    "colab_type": "code",
+    "id": "k0FwbAu5ODXb"
+   },
+   "outputs": [],
+   "source": [
+    "VIDEO_PATH = 'OSABR.mp4'\n",
+    "\n",
+    "CLIP_START = '00:00:00'\n",
+    "CLIP_END = '00:00:30'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "metadata": {
+    "colab": {},
+    "colab_type": "code",
+    "id": "w8GtjGuj8IVR"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "youtube = is_valid_youtube(VIDEO_PATH)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "_BMfWNdM7hQT"
+   },
+   "source": [
+    "## Display video\n",
+    "\n",
+    "Ensure that the correct video is displaying."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 501
+    },
+    "colab_type": "code",
+    "id": "ggeQ538I4axs",
+    "outputId": "258fa6df-acb6-4c10-fba1-02be50e1a4b2"
+   },
+   "outputs": [],
+   "source": [
+    "display_video(VIDEO_PATH, youtube)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "m3uiDBnvCS6h"
+   },
+   "source": [
+    "## Install OpenPose\n",
+    "\n",
+    "Installing OpenPose and its dependencies.\n",
+    "\n",
+    "This might take a while..."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import getpass\n",
+    "import os\n",
+    "\n",
+    "password = getpass.getpass()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!echo $password | sudo -S rm -rf openpose\n",
+    "!echo $password | sudo -S rm -rf cmake-3.13.0-Linux-x86_64.tar.gz"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 34
+    },
+    "colab_type": "code",
+    "id": "FOdkDhb6ga6N",
+    "outputId": "e6e1eef3-a9f9-42d4-bfea-6c996d4bc55b"
+   },
+   "outputs": [],
+   "source": [
+    "if not openpose_installed():\n",
+    "    !echo $password | sudo -S chmod -R 777 /usr/local\n",
+    "    !echo $password | sudo -S chmod u+x OpenPose_Notebook/scripts/install_openpose.sh\n",
+    "    !echo $password | sudo -S ./OpenPose_Notebook/scripts/install_openpose.sh"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "n5L3Z5YVrZ2R"
+   },
+   "source": [
+    "## Detect poses on the test video"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "Kn08K-3bp-W9"
+   },
+   "source": [
+    "Run OpenPose on the number of seconds of video set by CLIP_LEN_S"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 392
+    },
+    "colab_type": "code",
+    "id": "oNASdyyiO65I",
+    "outputId": "f8aff814-fef8-437a-be56-f88674f2c1dc"
+   },
+   "outputs": [],
+   "source": [
+    "!echo $password | sudo -S chmod u+x OpenPose_Notebook/scripts/run_openpose.sh\n",
+    "!echo $password | sudo -S ./OpenPose_Notebook/scripts/run_openpose.sh $VIDEO_PATH $CLIP_START $CLIP_END"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "kDDkgCCSrFTv"
+   },
+   "source": [
+    "Visualize the results:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 741
+    },
+    "colab_type": "code",
+    "id": "nZ3Ud9zLgOoQ",
+    "outputId": "0d1f8e09-4b63-4f45-e11b-967782b35925"
+   },
+   "outputs": [],
+   "source": [
+    "\n",
+    "display_local('openpose/output.mp4', width=960, height=720)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "accelerator": "GPU",
+  "colab": {
+   "collapsed_sections": [],
+   "name": "OpenPose.ipynb",
+   "provenance": [],
+   "toc_visible": true,
+   "version": "0.3.2"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
